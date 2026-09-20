@@ -18,3 +18,12 @@ jobs:
       - run: python -m kinejing demo --output runs/ci-demo
       - run: python scripts/verify_evidence.py
       - run: python scripts/dynamics_model_card.py
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -e . -r requirements-api.txt
+      - run: python -m unittest discover -s tests_api -v

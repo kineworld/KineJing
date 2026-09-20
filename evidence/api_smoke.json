@@ -1,0 +1,37 @@
+{
+  "kind": "local_http_real_checkpoint_smoke",
+  "model": "kinejing-dynamics-v0.1",
+  "checkpoint_sha256": "f9cf4aeac48ae603c8eedf9f8eb81aa33f939b49406f078f12e2ca9a9c249166",
+  "startup_seconds": 6.735657499993977,
+  "requests": [
+    {
+      "http_seconds": 0.9595668999972986,
+      "inference_seconds": 0.9019063000014285
+    },
+    {
+      "http_seconds": 0.07753589999629185,
+      "inference_seconds": 0.022224899999855552
+    },
+    {
+      "http_seconds": 0.07714929999929154,
+      "inference_seconds": 0.022485000001324806
+    }
+  ],
+  "shape": [
+    9,
+    3,
+    768
+  ],
+  "authenticated": true,
+  "unauthorized_status": 401,
+  "invalid_image_status": 422,
+  "input_source": "official test episode 1 initial images and joint actions",
+  "future_images_read": false,
+  "public_deployment": false,
+  "billing_enabled": false,
+  "limitations": [
+    "three repeated requests only, not a load test",
+    "latent output, not generated video",
+    "research checkpoint, no paid production service"
+  ]
+}
