@@ -2,6 +2,10 @@
 import argparse,hashlib,importlib.util,json,sys
 from pathlib import Path
 import numpy as np
+if __package__:
+    from .rollout_io import validate_inputs
+else:
+    from rollout_io import validate_inputs
 
 
 def digest(path):
@@ -40,16 +44,14 @@ def main():
         tokens=tokens.float().cpu().numpy();meta={'encoder':'vjepa2_1_vit_base_384','checkpoint_sha256':digest(a.checkpoint)}
         extra={}
     else:
+        with np.load(a.input,allow_pickle=False) as b:
+            latent=b['tokens'];actions=b['actions'];meta=json.loads(str(b['metadata'].item()))
+            schema=json.loads(str(b['action_schema'].item()))
+        validate_inputs(latent,actions,meta,schema,state)
         spec=importlib.util.spec_from_file_location('kinejing_external_rollout',a.repo/'kineworld_jepa/rollout.py')
         module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
         config=state['config'];model=module.ActionRollout(**config)
         model.load_state_dict(state['state_dict'],strict=True);model=model.to(a.device).eval()
-        with np.load(a.input,allow_pickle=False) as b:
-            latent=b['tokens'];actions=b['actions'];meta=json.loads(str(b['metadata'].item()))
-        if latent.ndim!=3 or actions.ndim!=3 or actions.shape[1]<1 or latent.shape[0]!=actions.shape[0]:raise ValueError('Expected tokens B,N,D and actions B,H,A')
-        if latent.shape[-1]!=config['dim'] or actions.shape[-1]!=config.get('action_dim',8):raise ValueError('Checkpoint dimensions do not match inputs')
-        if state.get('encoder_provenance')!=meta:raise ValueError('Rollout checkpoint was not trained in the supplied feature space')
-        if not np.isfinite(latent).all() or not np.isfinite(actions).all():raise ValueError('Non-finite input')
         with torch.inference_mode():
             sequence=model(torch.as_tensor(latent,device=a.device,dtype=torch.float32),torch.as_tensor(actions,device=a.device,dtype=torch.float32))
         rollout=np.stack([x.float().cpu().numpy() for x in sequence]);tokens=rollout[-1]
