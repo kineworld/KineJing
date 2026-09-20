@@ -48,6 +48,8 @@ Its checkpoint must contain:
 {
     "config": {"dim": 768, "depth": 2, "heads": 12, "action_dim": 14},
     "state_dict": trained_rollout.state_dict(),
+    "action_schema": {"columns": ["..."], "units": ["..."],
+                      "coordinate_frame": "robot_base", "normalization": "training-transform-v1"},
     "encoder_provenance": {"encoder": "vjepa2_1_vit_base_384", "checkpoint_sha256": "..."}
 }
 ```
@@ -56,9 +58,19 @@ The dimensions above illustrate the protocol; choose them to match the actual
 encoder and embodiment, and train that predictor before use. No such trained
 checkpoint is bundled or claimed. Do not serialize a random model as a trained one.
 
-The input NPZ contains the encoder `tokens`, the unchanged `metadata`, and an
-`actions` array B × H × A in the same normalization and coordinate convention used
-during predictor training. The output contains the full `rollout`, final tokens,
+The input NPZ contains the encoder `tokens`, unchanged `metadata`, `action_schema`,
+and an `actions` array B × H × A. Declare every action column and unit, coordinate
+frame, and a normalization identifier that refers to the exact training transform.
+The full schema must equal the checkpoint's schema; missing schema is rejected.
+The packer preserves values and does not normalize them. A legacy checkpoint must
+be annotated from its actual training records, never with guessed conventions.
+
+```bash
+python -m kinejing pack-actions --features runs/encoded.npz --actions data/actions.npy --schema data/action-schema.json --output data/tokens-and-actions.npz
+```
+
+This closes the encoder-to-dynamics input connection but does not supply trained
+weights or validate robot prediction quality. The output contains the full `rollout`, final tokens,
 mean embedding, source feature metadata and predictor checkpoint digest.
 Dimension/provenance mismatches fail before inference. Feature similarity cannot
 substitute for a closed-loop robot evaluation.
