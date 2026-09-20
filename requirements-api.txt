@@ -1,0 +1,5 @@
+# Optional local API environment, Python >=3.10; install torch/vision separately.
+fastapi==0.141.1
+uvicorn==0.53.0
+httpx==0.28.1
+Pillow>=10
