@@ -29,5 +29,5 @@ Its paired SSIM medians are listed below; full records also retain the mean regr
 
 - [Local format-check receipt](format_check.json): reports format only, not prediction quality.
 - [Synthetic demo manifest](demo_manifest.json): no neural weights or benchmark data.
-- External neural checkpoint inference and end-to-end neural composition remain unverified.
+- DINOv2 pretrained inference and a small learned latent predictor are recorded in [the model card](../docs/DYNAMICS_MODEL_CARD.md); large generative models and end-to-end composition remain unverified.
 - Official KineJing score: unavailable. The research code release does not update a competition entry.

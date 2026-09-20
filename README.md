@@ -13,8 +13,12 @@ KineJing 是 [KineWorld](https://github.com/kineworld) 的世界模型集成研�
 它把本地可运行的三视角运动预测基线，与 CausalWM、Wan 2.2、V-JEPA 2.1 和
 KineWorld 潜在动力学代码连接到统一的命令与工件接口。
 
-当前发布的是 **CPU 基线、外部模型适配器与特征比较流程**。大型模型权重需要另行获取；
-外部模型的真实权重推理、联合训练和端到端组合效果尚未验证。没有发布新的融合权重或官方榜单分数。
+当前已有 **CPU 基线、真实 DINOv2 权重推理、训练完成的三视角动作条件特征预测器，以及外部生成模型适配器**。
+新预测器的训练、分组评估和权重哈希见[模型卡](docs/DYNAMICS_MODEL_CARD.md)。它输出未来特征，不生成 RGB 视频；不是新训练的基础大模型。
+CausalWM / Wan / V-JEPA 的完整权重推理、联合训练和端到端组合效果仍未验证，没有官方榜单分数。
+
+另有直接基于上游代码修改的 [KineJing-CausalWM](https://github.com/kineworld/KineJing-CausalWM)：
+增加可选的分块 VAE 解码及逐块转移到 CPU，保留上游来源与许可证；完整模型显存与画质尚未实测。
 
 ### 工作流
 
@@ -60,6 +64,7 @@ Python 3.10+，并按各上游项目单独安装依赖。生成正式 H.264 视�
 | 组件 | 用途 | 本仓库验证到的程度 |
 |---|---|---|
 | KineJing Motion | 动作条件检索、共享时间对齐、双腕运动迁移 | CPU 运行、局部验证、完整结果格式校验 |
+| [KineJing Dynamics](docs/DYNAMICS_MODEL_CARD.md) + [DINOv2](https://github.com/facebookresearch/dinov2) | 冻结预训练视觉特征＋勘境训练的三视角动作预测 | 已训练、独立加载并推理；公开开发集分组评估；无 RGB 解码器 |
 | [CausalWM](https://github.com/AetherLabsAI/CausalWM) | 单图＋文本生成 flow → pointmap → RGB | 参数构造与失败门禁测试；真实权重未运行 |
 | [Wan 2.2](https://github.com/Wan-Video/Wan2.2) | TI2V-5B 视频生成备选路径 | 参数构造测试；真实权重未运行 |
 | [V-JEPA 2.1](https://github.com/facebookresearch/vjepa2) | 冻结视频特征 | 本地权重适配代码；真实权重未运行 |
