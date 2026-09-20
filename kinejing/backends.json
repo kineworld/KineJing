@@ -1,7 +1,56 @@
 {
-  "causalwm": {"repository":"https://github.com/AetherLabsAI/CausalWM", "revision":"09caadc9dbd84be3c64586ef380c51180628db99", "license":"LTX-2 Community License", "role":"single-image/text to flow, pointmap and RGB", "status":"launcher tested; real checkpoint inference not executed here", "action_conditioned":false, "synchronized_multiview":false},
-  "wan22": {"repository":"https://github.com/Wan-Video/Wan2.2", "revision":"42bf4cfaa384bc21833865abc2f9e6c0e67233dc", "license":"Apache-2.0; review checkpoint terms", "role":"TI2V-5B image/text video generation", "status":"launcher tested; real checkpoint inference not executed here", "action_conditioned":false, "synchronized_multiview":false},
-  "vjepa21": {"repository":"https://github.com/facebookresearch/vjepa2", "revision":"204698b45b3712590f06245fbfba32d3be539812", "license":"MIT / Apache-2.0 by component; review checkpoint terms", "role":"V-JEPA 2.1 ViT-B/16 frozen video features", "status":"adapter implemented; checkpoint inference unverified", "action_conditioned":false, "synchronized_multiview":false},
-  "kine-jepa": {"repository":"https://github.com/kineworld/kine-jepa", "revision":"70364f8678dd78cf2bad5ce5c37fdc2e234709a0", "license":"MIT", "role":"ActionRollout over supplied latent tokens and action sequence", "status":"adapter implemented; requires separately trained compatible checkpoint", "action_conditioned":true, "synchronized_multiview":false},
-  "motion": {"repository":"https://github.com/kineworld/KineJing", "revision":null, "license":"MIT", "role":"CPU action-conditioned tri-view example-motion transfer", "status":"executed on full 500-episode public test input bundle; local metrics only", "action_conditioned":true, "synchronized_multiview":true}
+  "causalwm": {
+    "repository": "https://github.com/AetherLabsAI/CausalWM",
+    "revision": "09caadc9dbd84be3c64586ef380c51180628db99",
+    "license": "LTX-2 Community License",
+    "role": "single-image/text to flow, pointmap and RGB",
+    "status": "launcher tested; real checkpoint inference not executed here",
+    "action_conditioned": false,
+    "synchronized_multiview": false
+  },
+  "wan22": {
+    "repository": "https://github.com/Wan-Video/Wan2.2",
+    "revision": "42bf4cfaa384bc21833865abc2f9e6c0e67233dc",
+    "license": "Apache-2.0; review checkpoint terms",
+    "role": "TI2V-5B image/text video generation",
+    "status": "launcher tested; real checkpoint inference not executed here",
+    "action_conditioned": false,
+    "synchronized_multiview": false
+  },
+  "vjepa21": {
+    "repository": "https://github.com/facebookresearch/vjepa2",
+    "revision": "204698b45b3712590f06245fbfba32d3be539812",
+    "license": "MIT / Apache-2.0 by component; review checkpoint terms",
+    "role": "V-JEPA 2.1 ViT-B/16 frozen video features",
+    "status": "adapter implemented; checkpoint inference unverified",
+    "action_conditioned": false,
+    "synchronized_multiview": false
+  },
+  "kine-jepa": {
+    "repository": "https://github.com/kineworld/kine-jepa",
+    "revision": "70364f8678dd78cf2bad5ce5c37fdc2e234709a0",
+    "license": "MIT",
+    "role": "ActionRollout over supplied latent tokens and action sequence",
+    "status": "adapter implemented; requires separately trained compatible checkpoint",
+    "action_conditioned": true,
+    "synchronized_multiview": false
+  },
+  "motion": {
+    "repository": "https://github.com/kineworld/KineJing",
+    "revision": null,
+    "license": "MIT",
+    "role": "CPU action-conditioned tri-view example-motion transfer",
+    "status": "executed on full 500-episode public test input bundle; local metrics only",
+    "action_conditioned": true,
+    "synchronized_multiview": true
+  },
+  "dinov2": {
+    "repository": "https://github.com/facebookresearch/dinov2",
+    "revision": "7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+    "license": "Apache-2.0",
+    "role": "frozen ViT-S/14 features for KineJing Dynamics",
+    "status": "real pretrained inference executed; KJ-DINO-0001 trained and locally evaluated",
+    "action_conditioned": false,
+    "synchronized_multiview": false
+  }
 }
