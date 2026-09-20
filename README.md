@@ -10,6 +10,7 @@
 <p align="center"><a href="#quickstart">快速开始</a> · <a href="#components">组件</a> · <a href="docs/INTEGRATION.md">集成指南</a> · <a href="evidence/README.md">实验记录</a> · <a href="NOTICE.md">来源与许可</a></p>
 
 KineJing 是 [KineWorld](https://github.com/kineworld) 的世界模型集成研究项目。
+**感谢原作者和贡献者的开源精神。** 我们保留来源、署名与许可证，记录勘境新增工作；详见[致谢](ACKNOWLEDGEMENTS.md)和[组织项目与改进目录](https://github.com/kineworld/.github/blob/main/world-models/open-source-adoption.md)。
 它把本地可运行的三视角运动预测基线，与 CausalWM、Wan 2.2、V-JEPA 2.1 和
 KineWorld 潜在动力学代码连接到统一的命令与工件接口。
 
