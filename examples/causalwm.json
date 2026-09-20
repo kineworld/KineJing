@@ -1,0 +1,12 @@
+{
+  "backend":"causalwm",
+  "repo":"external/CausalWM",
+  "python":"python",
+  "image":"data/first_frame.png",
+  "prompt":"The robot picks up the block and places it in the container.",
+  "checkpoint":"checkpoints/CausalWMv1.safetensors",
+  "base_checkpoint":"checkpoints/ltx-2.3-22b-dev.safetensors",
+  "text_encoder":"checkpoints/gemma-3-12b",
+  "output":"runs/causalwm-example",
+  "seed":42
+}

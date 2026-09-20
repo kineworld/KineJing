@@ -1,0 +1,11 @@
+{
+  "kind": "synthetic software integration demo",
+  "seed": 42,
+  "neural_weights_used": false,
+  "official_score": null,
+  "frames": 17,
+  "resolution": [
+    960,
+    240
+  ]
+}

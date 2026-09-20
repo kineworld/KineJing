@@ -1,0 +1,9 @@
+{
+  "backend":"vjepa21",
+  "repo":"external/vjepa2",
+  "python":"python",
+  "input":"runs/causalwm-example/rgb.mp4",
+  "checkpoint":"checkpoints/vjepa2_1_vitb_dist_vitG_384.pt",
+  "output":"runs/causalwm-features.npz",
+  "device":"cpu"
+}

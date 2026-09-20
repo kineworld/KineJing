@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "scope": "Local official format check of the CPU baseline artifact; no official score",
+  "episodes": 500,
+  "videos": 1500,
+  "archive_sha256": "3e5937c3c44c1189019d0c9e65b389c0b72d96fc3db3efa9fd4cc8bc8729f3bc",
+  "checker_sha256": "c2eee69b205340a5db0bc4b0b3c90dedc4c5606071f261923c5cce5d14d4a84c",
+  "official_score": null
+}

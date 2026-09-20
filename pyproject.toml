@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=65"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kinejing"
+version = "0.1.0"
+description = "KineWorld's composable world-model research pipeline"
+requires-python = ">=3.8"
+dependencies = ["numpy>=1.24,<3", "opencv-python-headless>=4.8,<6", "h5py>=3.8,<4"]
+
+[project.scripts]
+kinejing = "kinejing.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["kinejing*"]
+
+[tool.setuptools.package-data]
+kinejing = ["backends.json"]

@@ -1,0 +1,9 @@
+{
+  "backend":"kine-jepa",
+  "repo":"external/kine-jepa",
+  "python":"python",
+  "input":"data/tokens-and-actions.npz",
+  "checkpoint":"checkpoints/trained-action-rollout.pt",
+  "output":"runs/predicted-goal-features.npz",
+  "device":"cpu"
+}

@@ -1,0 +1,10 @@
+{
+  "backend":"wan22",
+  "repo":"external/Wan2.2",
+  "python":"python",
+  "image":"data/first_frame.png",
+  "prompt":"The robot moves the block across the table.",
+  "checkpoint":"checkpoints/Wan2.2-TI2V-5B",
+  "output":"runs/wan22-example.mp4",
+  "seed":42
+}
