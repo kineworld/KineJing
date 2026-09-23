@@ -13,6 +13,26 @@ def validate_schema(schema, width):
         raise ValueError('Declare a unit for each action dimension')
     for key in ['coordinate_frame','normalization']:
         if not isinstance(schema.get(key),str) or not schema[key].strip(): raise ValueError('Missing '+key)
+    if 'action_limits' in schema:
+        limits=schema['action_limits']
+        if not isinstance(limits,dict) or set(limits)!={'low','high'}:
+            raise ValueError('action_limits needs low and high arrays')
+        for key in ('low','high'):
+            values=limits[key]
+            if (not isinstance(values,list) or len(values)!=width or
+                any(not isinstance(x,(int,float)) or isinstance(x,bool) for x in values)):
+                raise ValueError('action_limits must name a numeric limit for every axis')
+        low=np.asarray(limits['low'],dtype=np.float64)
+        high=np.asarray(limits['high'],dtype=np.float64)
+        if not np.isfinite(low).all() or not np.isfinite(high).all() or not np.all(low<high):
+            raise ValueError('action_limits must be finite with low < high on every axis')
+
+def action_limits(schema, width):
+    """Return optional per-axis limits for Kine-JEPA planners in schema order."""
+    validate_schema(schema,width)
+    limits=schema.get('action_limits')
+    if limits is None: return None
+    return limits['low'][:],limits['high'][:]
 
 def validate_inputs(tokens,actions,metadata,schema,checkpoint=None):
     if tokens.ndim!=3 or actions.ndim!=3 or any(n<1 for n in tokens.shape+actions.shape) or tokens.shape[0]!=actions.shape[0]:
@@ -20,7 +40,13 @@ def validate_inputs(tokens,actions,metadata,schema,checkpoint=None):
     if not np.isfinite(tokens).all() or not np.isfinite(actions).all(): raise ValueError('Non-finite input')
     if not isinstance(metadata,dict) or any(not isinstance(metadata.get(k),str) or not metadata[k] for k in ['encoder','checkpoint_sha256']):
         raise ValueError('Feature provenance required')
-    validate_schema(schema,actions.shape[-1])
+    limits=action_limits(schema,actions.shape[-1])
+    if limits is not None:
+        dtype=actions.dtype if np.issubdtype(actions.dtype,np.floating) else np.float64
+        low=np.asarray(limits[0],dtype=dtype)
+        high=np.asarray(limits[1],dtype=dtype)
+        if np.any(actions<low) or np.any(actions>high):
+            raise ValueError('Actions exceed declared per-axis action_limits')
     if checkpoint is not None:
         config=checkpoint['config']
         if tokens.shape[-1]!=config['dim'] or actions.shape[-1]!=config.get('action_dim',8): raise ValueError('Checkpoint dimension mismatch')

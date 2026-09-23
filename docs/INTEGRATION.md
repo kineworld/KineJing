@@ -65,6 +65,18 @@ The full schema must equal the checkpoint's schema; missing schema is rejected.
 The packer preserves values and does not normalize them. A legacy checkpoint must
 be annotated from its actual training records, never with guessed conventions.
 
+When physical or normalized actuator limits are known from the same training
+protocol, the schema may include `"action_limits": {"low": [-0.2, 0.4],
+"high": [0.1, 0.6]}` in the order of `columns`. `pack-actions` rejects values
+outside those per-axis limits before writing the NPZ. The limits describe the
+**stored action values** after any declared training normalization; they are not
+inferred from units or measured from test data. The full schema, including limits,
+must still equal the trained checkpoint's schema. Existing schemas without limits
+remain valid, but provide no range check. Code using `kine-jepa` can read the pair
+with `kinejing.rollout_io.action_limits(schema, action_dim)` and pass it as
+`action_low` and `action_high` to `LatentPlanner` or `SWMPlanner`; the latter also
+needs `enforce_action_bounds=True` to score only in-range candidates.
+
 ```bash
 python -m kinejing pack-actions --features runs/encoded.npz --actions data/actions.npy --schema data/action-schema.json --output data/tokens-and-actions.npz
 ```
