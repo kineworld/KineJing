@@ -11,6 +11,11 @@
 
 KineJing 是 [KineWorld](https://github.com/kineworld) 的世界模型集成研究项目。
 已增加[本地鉴权 API](docs/API.md)，可调用真实研究权重返回动作条件视觉特征；尚未开放公网或收费。
+
+### 非收费试点申请
+
+如果您正在验证动作条件预测、视频表征或世界模型评测，可[提交非收费试点申请](https://github.com/kineworld/KineJing/issues/new?template=pilot-interest.yml)。请只写非敏感任务概要，不在公开 Issue 上传视频、轨迹、个人信息或密钥。我们会先确认评测目标、数据使用权限与简单基线，再决定是否开展受控试点。当前没有公开收费 API、客户效果承诺或服务等级承诺。
+
 **感谢原作者和贡献者的开源精神。** 我们保留来源、署名与许可证，记录勘境新增工作；详见[致谢](ACKNOWLEDGEMENTS.md)和[组织项目与改进目录](https://github.com/kineworld/.github/blob/main/world-models/open-source-adoption.md)。
 它把本地可运行的三视角运动预测基线，与 CausalWM、Wan 2.2、V-JEPA 2.1 和
 KineWorld 潜在动力学代码连接到统一的命令与工件接口。
