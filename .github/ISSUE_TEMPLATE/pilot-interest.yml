@@ -1,0 +1,54 @@
+name: 勘境世界模型非收费试点申请
+description: 讨论可验证的机器人或视频任务；当前没有公开收费 API。
+title: "[试点申请] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        这是公开 GitHub Issue。请只写非敏感概要，不上传视频、轨迹、源代码、密钥、联系方式或合同。
+        当前 KineJing 是研究预览；提交申请不代表已获得 API 接入、商业许可或服务等级承诺。
+  - type: dropdown
+    id: task
+    attributes:
+      label: 您希望验证的任务类型
+      options:
+        - 动作条件预测或规划
+        - 视频表征或异常对比
+        - 世界模型评测与风险准入
+        - 其他研究任务
+    validations:
+      required: true
+  - type: textarea
+    id: decision
+    attributes:
+      label: 要改善的具体决策
+      description: 请描述一个非敏感的输入、输出及使用者会据此采取的动作。
+      placeholder: 例如：对公开演示视频中的动作候选做相对排序，供研究人员复核。
+    validations:
+      required: true
+  - type: textarea
+    id: comparator
+    attributes:
+      label: 目前如何处理同一任务
+      description: 概述现有规则、模型或人工流程，以便设计公平比较；不要披露专有实现。
+    validations:
+      required: true
+  - type: dropdown
+    id: data
+    attributes:
+      label: 是否有可合法用于初步评测的公开或脱敏数据
+      options:
+        - 有公开数据或已准备脱敏数据
+        - 需要先讨论数据权限与处理方式
+        - 暂无数据，仅希望交流
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: 公开申请边界
+      options:
+        - label: 我不会在此 Issue 上传客户视频、个人信息、密钥或其他机密材料。
+          required: true
+        - label: 我理解当前是非收费研究试点申请，并非已经上线的付费 API。
+          required: true
